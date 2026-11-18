@@ -1,0 +1,10 @@
+J1 
+ Prise en compte du sujet
+ Recherche sur les phénomènes scientifiques, description causes conséquences
+ Etude du sujet, choix des données à analyser , stacks 
+ Création du GitHub Project, backlog 
+ Choix sur ONI on a indice historique officiel , données mensuelles avec periode de 3 mois , 
+ on pourra faire nos 4 fonctionnalités, on a fait les user stories puis dessiné la maquette
+ La suite a été de push l'architecture sur le Github ainsi que certain fichiers donnant le cap sur la conception
+ (maquette, roadmap...)
+ 
