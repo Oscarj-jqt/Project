@@ -8,7 +8,8 @@ Produire les maquettes
 Rédiger les user stories et critères d’acceptation P0 2
 Produire les wireframes des écrans principaux P1 2
 
-J1 — Données
+J2 — Données
+Copie NOAA → extraction → transformation et vérification → PostgreSQL → tests
 
 - [x] - Télécharger les données ONI NOAA
 - [ ] - Modéliser les observations mensuelles
@@ -33,7 +34,7 @@ Initialiser React
 Afficher les données sous forme de courbe
 Ajouter les filtres de période
 Afficher les épisodes El Niño et La Niña
-Comparer ONI et RONI si RONI est intégré
+Comparer deux épisodes ONI historiques
 Rendre l’interface responsive
 Gérer les états de chargement et d’erreur
 

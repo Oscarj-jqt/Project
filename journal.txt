@@ -10,4 +10,15 @@ J1
  
  J2 
  Téléchargement des données et conservation des données en local, sourcées
+ Création des items J2 dans le GitHub Project (7 items essentiels, priorité P0)
+ Analyse du format de la copie NOAA : une ligne par année, une colonne par période de 3 mois (DJF...NDJ),
+ cellules vides pour les périodes non encore publiées, en-têtes répétés à ignorer
+ Modèle d'une observation : date centrale (1er du mois central, ex. DJF 2026 = 2026-01-01), période NOAA, valeur ONI en °C
+ Schéma PostgreSQL : table oni (date_centrale clé primaire, periode, valeur_oni), contraintes CHECK
+ sur la période et la cohérence période/date, migration 001 appliquée dans Docker (PostgreSQL 17, mot de passe dans .env hors Git)
+ ETL Python en deux étapes : oni.py (extraction HTML + transformation en observations), load.py (chargement avec psycopg 3,
+ une transaction, mise à jour si la date existe déjà donc import relançable sans doublon)
+ Tests pytest : transformation d'une ligne, cellules vides, valeur invalide, comparaison avec des valeurs de la source (4 tests validés)
+ Résultat : 921 observations importées (1950-01 à 2026-09), janvier 2026 = DJF -0.4 vérifié, second import sans changement du total
+ Documentation : provenance, bibliothèques et commandes d'import/test dans le README
  
