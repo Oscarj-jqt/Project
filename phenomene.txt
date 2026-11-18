@@ -1,0 +1,109 @@
+ENSO Monitor — Synthèse scientifique et cadrage des données
+
+1. Sujet du projet
+
+Application permettant d'analyser des données scientifiques relatives aux
+événements El Niño et La Niña, à partir de l'indice ONI fourni par la NOAA (agence scientifique américaine)
+
+L'objectif est de présenter des observations historiques de manière
+compréhensible pour toute personne même non scientifique qui s'interesse au sujet
+
+
+2. Le phénomène ENSO
+
+ENSO signifie « El Niño–Southern Oscillation ». Il désigne un cycle de
+variations du système océan-atmosphère dans le Pacifique équatorial.
+
+ENSO comprend trois phases :
+
+- El Niño ;
+- La Niña ;
+- une phase neutre.
+
+Les événements ne sont pas strictement périodiques. Ils apparaissent
+généralement tous les 2 à 7 ans, mais leur fréquence, leur intensité et leur
+durée sont variables.
+
+
+3. El Niño
+
+El Niño correspond à une augmentation anormale de la température de surface de
+l'océan dans le Pacifique tropical central et oriental.
+
+Le phénomène est notamment associé à un affaiblissement des alizés et à une
+modification du couplage entre l'océan et l'atmosphère. Ca peut notamment être dû à la variation de la pression
+atmosphérique mais pas que.
+
+Le réchauffement peut déplacer la thermocline et réduire la remontée d'eaux
+froides riches en nutriments. Cela peut perturber les écosystèmes marins et
+les activités de pêche. Ca cause aussi des variations de température aux Etats-Unis durant les mois qui viennent.
+
+
+4. La Niña
+
+La Niña correspond à une anomalie négative de la température de surface de
+l'océan dans le Pacifique tropical central et oriental.
+
+Elle est notamment associée à un renforcement des alizés et à une remontée
+plus importante d'eaux froides riches en nutriments dans certaines zones.
+
+Ses conséquences climatiques et écologiques peuvent être différentes, voire
+opposées, à celles d'El Niño. Elles doivent être étudiées avec des données
+adaptées et ne doivent pas être déduites uniquement de l'indice ONI.
+
+
+5. L'indice ONI
+
+L'ONI (Oceanic Niño Index) est une moyenne mobile sur trois mois des
+anomalies de température de surface de la mer dans la région Niño 3.4.
+
+La région Niño 3.4 se situe dans le Pacifique central 
+
+Les valeurs sont exprimées en degrés Celsius (°C). Une anomalie correspond
+à la différence entre la température observée et une température moyenne de
+référence.
+
+Les colonnes du tableau représentent des périodes de trois mois qui se
+chevauchent :
+
+- DJF : décembre, janvier, février ;
+- JFM : janvier, février, mars ;
+- FMA : février, mars, avril.
+
+La période de référence est une moyenne climatique calculée sur des périodes
+de 30 ans et mise à jour régulièrement par la NOAA. 
+
+
+6. Seuils d'interprétation
+
+Un seuil courant pour caractériser les anomalies est :
+
+- ONI supérieur ou égal à +0,5 °C : anomalie chaude ;
+- ONI inférieur ou égal à -0,5 °C : anomalie froide ;
+- entre -0,5 °C et +0,5 °C : anomalie proche de la normale.
+
+Pour caractériser un épisode El Niño ou La Niña, le seuil doit généralement
+être atteint pendant au moins cinq saisons mobiles de trois mois consécutives.
+
+Dans le tableau NOAA, les valeurs froides peuvent être présentées en bleu et
+les valeurs chaudes en rouge. Ces couleurs facilitent la lecture, mais
+l'application devra aussi afficher les valeurs numériques et une légende.
+
+
+7. Choix des données pour le MVP
+
+On a choisi ONI pour 
+
+8. Sources
+
+Source principale — NOAA Climate Prediction Center, ONI :
+https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/oni/v6/index.php
+
+Source complémentaire — NOAA Climate Prediction Center, RONI :
+https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
+
+Copie locale : 
+data/Climate Prediction Center - ONI.html
+
+Article d'actualité consulté :
+https://www.slate.fr/monde/phenomene-el-nino-affaiblissement-premature-vortex-polaire-froid-meteo

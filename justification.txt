@@ -1,0 +1,4 @@
+L'ONI compare dans la même zone le relevé des température selon la période étudiée
+Mais le RONI travaille avec l'ensemble des océan tropicaux -> trop de variation on fait au plus simple
+On choisit donc ONI, aussi les conséquences trouvées impactent d'autres zones ce qui 
+est plus compréhensible à partir de l'ONI, les données sont aussi mieux interprétables étant donnée que c'est sur 1 même zone
