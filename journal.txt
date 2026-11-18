@@ -8,3 +8,6 @@ J1
  La suite a été de push l'architecture sur le Github ainsi que certain fichiers donnant le cap sur la conception
  (maquette, roadmap...)
  
+ J2 
+ Téléchargement des données et conservation des données en local, sourcées
+ 
