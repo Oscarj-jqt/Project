@@ -5,3 +5,21 @@ step.txt
 J2.txt
 J3.txt
 justification.txt
+
+# Python bytecode et caches
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+.pytest_cache/
+.coverage
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
