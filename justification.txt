@@ -1,4 +1,18 @@
+Argumentation obligatoire
+Pour chaque choix déterminant, précisez le besoin, les solutions envisagées, le choix final, les
+avantages, les limites et la manière de vérifier le résultat. Exemples : pourquoi PostgreSQL, pourquoi
+un traitement ETL séparé, pourquoi une API versionnée, pourquoi Docker Compose, comment assurer
+l’accessibilité du graphique et la traçabilité des données.
+
+
+
+
 L'ONI compare dans la même zone le relevé des température selon la période étudiée
 Mais le RONI travaille avec l'ensemble des océan tropicaux -> trop de variation on fait au plus simple
 On choisit donc ONI, aussi les conséquences trouvées impactent d'autres zones ce qui 
 est plus compréhensible à partir de l'ONI, les données sont aussi mieux interprétables étant donnée que c'est sur 1 même zone
+
+justifier l'etl python 
+
+
+justifier le pool connexion , on a supprime le test_health à ce niveau il semblait inutile a ce stade
