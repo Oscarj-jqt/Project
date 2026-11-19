@@ -27,3 +27,15 @@ devreait on garder les data sous forme HTML ou plutot json, txt ?
 créer un env.example
 faire un requirements
 documenter cela
+
+pourquoi linting, bundler
+
+Pour maintenant : on garde compose juste avec PostgreSQL, et on code le frontend en local.
+
+Avantage du "tout dans compose" à la fin :
+
+Quelqu'un d'autre peut faire docker compose up et ça marche d'emblée
+Plus besoin de npm install, python -m venv, etc.
+Versions uniformes (Node 24, Python 3.12, PostgreSQL 17)
+À la fin (jour 5) : on ajoute le frontend et API au compose pour la démo.
+Services pour frontend et API (avec Dockerfile)

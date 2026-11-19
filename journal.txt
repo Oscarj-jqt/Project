@@ -36,4 +36,7 @@ observées sur le terminal
 
  Tous les tests passent en 4.03s avec pytest, aucune configuration complexe requise
  
+
+J4
+Commencement j4 avec initialisation de l'app frontend React (vite + TypeScript)
  
