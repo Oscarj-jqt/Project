@@ -1,4 +1,4 @@
-J1 
+﻿J1 
  Prise en compte du sujet
  Recherche sur les phénomènes scientifiques, description causes conséquences
  Etude du sujet, choix des données à analyser , stacks 
@@ -11,14 +11,29 @@ J1
  J2 
  Téléchargement des données et conservation des données en local, sourcées
  Création des items J2 dans le GitHub Project (7 items essentiels, priorité P0)
- Analyse du format de la copie NOAA : une ligne par année, une colonne par période de 3 mois (DJF...NDJ),
- cellules vides pour les périodes non encore publiées, en-têtes répétés à ignorer
- Modèle d'une observation : date centrale (1er du mois central, ex. DJF 2026 = 2026-01-01), période NOAA, valeur ONI en °C
- Schéma PostgreSQL : table oni (date_centrale clé primaire, periode, valeur_oni), contraintes CHECK
- sur la période et la cohérence période/date, migration 001 appliquée dans Docker (PostgreSQL 17, mot de passe dans .env hors Git)
- ETL Python en deux étapes : oni.py (extraction HTML + transformation en observations), load.py (chargement avec psycopg 3,
- une transaction, mise à jour si la date existe déjà donc import relançable sans doublon)
- Tests pytest : transformation d'une ligne, cellules vides, valeur invalide, comparaison avec des valeurs de la source (4 tests validés)
- Résultat : 921 observations importées (1950-01 à 2026-09), janvier 2026 = DJF -0.4 vérifié, second import sans changement du total
- Documentation : provenance, bibliothèques et commandes d'import/test dans le README
+Importation des données de la sources dans la base avec succès les données sont accessibles et bien 
+observées sur le terminal
+ 
+ J3 
+ intialisation de l'API avec connexion à la base de données 
+ Architecture FastAPI avec separation en routers pour scalabilité pour alléger le main 
+ 
+ On avait pensé à une utilisation de async avec pool de connexion mais ca bloquait avec windows les tests étaient pas fonctionnels
+
+ SOLUTION : Passage en mode synchrone (ConnectionPool classique)
+ - Remplacé AsyncConnectionPool par ConnectionPool (psycopg3 version synchrone)
+ - Suppression de tous les async def, await, asynccontextmanager
+ - Endpoints redeviennent fonctions simples (non-async)
+ - Lifespan remplacée par add_event_handler("startup") / add_event_handler("shutdown")
+ - Résultat : 7 tests passent instantanément, aucune dépendance event loop
+ 
+ Endpoints implémentés :
+ GET /health : vérification simple de la connexion à la base de données (retourne 503 si indisponible)
+ GET /api/v1/oni : liste complète des observations triées par date_centrale croissante
+ Filtres de date : paramètres optionnels debut et fin (YYYY-MM-DD format) avec validation FastAPI,
+ requête SQL dynamique avec WHERE clause et paramètres sûrs (psycopg3 autoescaping)
+ 
+
+ Tous les tests passent en 4.03s avec pytest, aucune configuration complexe requise
+ 
  
