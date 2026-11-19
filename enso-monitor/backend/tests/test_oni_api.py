@@ -92,3 +92,23 @@ def test_filter_by_date_range(client):
     # Vérifier que les observations sont dans la plage
     for obs in observations:
         assert "2000-01-01" <= obs["date_centrale"] <= "2010-12-31"
+
+
+def test_invalid_date_format_returns_422(client):
+    """Vérifie que date invalide retourne 422"""
+    response = client.get("/api/v1/oni?debut=invalid-date")
+    assert response.status_code == 422
+
+
+def test_debut_greater_than_fin_returns_422(client):
+    """Vérifie que debut > fin retourne 422"""
+    response = client.get("/api/v1/oni?debut=2020-01-01&fin=2010-12-31")
+    assert response.status_code == 422
+
+
+def test_empty_date_range_returns_200_with_empty_list(client):
+    """Vérifie qu'une plage sans donnée retourne 200 avec []"""
+    # Chercher des données impossibles (après 9999)
+    response = client.get("/api/v1/oni?debut=9999-01-01&fin=9999-12-31")
+    assert response.status_code == 200
+    assert response.json() == []

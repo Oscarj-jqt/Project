@@ -13,6 +13,9 @@ On choisit donc ONI, aussi les conséquences trouvées impactent d'autres zones 
 est plus compréhensible à partir de l'ONI, les données sont aussi mieux interprétables étant donnée que c'est sur 1 même zone
 
 justifier l'etl python 
-
+le schéma sql
 
 justifier le pool connexion , on a supprime le test_health à ce niveau il semblait inutile a ce stade
+
+on avait pensé a pool de connexion et asynchone mais bloque les testss avec windows alors on fait simple 
+avec synchrone -> tests fonctionnels

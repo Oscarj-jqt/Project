@@ -37,6 +37,13 @@ def list_oni_observations(
     - debut : Date de début au format YYYY-MM-DD
     - fin : Date de fin au format YYYY-MM-DD
     """
+    # Valider que debut <= fin
+    if debut and fin and debut > fin:
+        raise HTTPException(
+            status_code=422,
+            detail="debut doit être inférieur ou égal à fin",
+        )
+    
     try:
         with get_connection() as conn:
             # Construire la requête dynamiquement selon les filtres
