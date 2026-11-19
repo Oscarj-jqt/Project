@@ -1,0 +1,10 @@
+J4 — Interface
+
+Initialiser React, archi dossier config API proxy
+Afficher les données sous forme de courbe avec chart ou recharts
+Ajouter les filtres de période, filtre par date 
+Afficher les épisodes El Niño et La Niña
+Comparer deux épisodes ONI historiques
+Rendre l’interface responsive
+Gérer les états de chargement et d’erreur
+Tests vitest + readme documentation, justification des choix

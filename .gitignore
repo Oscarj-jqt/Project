@@ -16,10 +16,13 @@ __pycache__/
 .pytest_cache/
 .coverage
 
+# Environment
+venv/
+env/
+
 # IDE
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
-

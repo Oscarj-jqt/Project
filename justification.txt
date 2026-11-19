@@ -19,3 +19,11 @@ justifier le pool connexion , on a supprime le test_health à ce niveau il sembl
 
 on avait pensé a pool de connexion et asynchone mais bloque les testss avec windows alors on fait simple 
 avec synchrone -> tests fonctionnels
+
+
+dans README documenter les installations dotenv, etc...
+
+devreait on garder les data sous forme HTML ou plutot json, txt ?
+créer un env.example
+faire un requirements
+documenter cela
