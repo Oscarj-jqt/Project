@@ -1,11 +1,9 @@
 """
-Application FastAPI pour l'analyse ENSO/ONI.
+Application FastAPI pour l'analyse des données ENSO/ONI
 
-- Démarrage : initialise le pool de connexions PostgreSQL.
-- Arrêt : ferme le pool proprement.
+- Démarrage : initialise le pool de connexions PostgreSQL
+- Arrêt : ferme le pool proprement
 """
-
-from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
@@ -14,16 +12,16 @@ from db import initialize_pool, close_pool
 from routers.api import router
 
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    """Gère l'initialisation et la fermeture du pool de connexions."""
+def lifespan_startup():
+    """Initialise le pool de connexions au démarrage"""
     config = get_database_config()
-    await initialize_pool(config)
+    initialize_pool(config)
     print(f"Pool de connexions initialisé : {config.host}:{config.port}/{config.database}")
 
-    yield
 
-    await close_pool()
+def lifespan_shutdown():
+    """Ferme le pool de connexions à l'arrêt"""
+    close_pool()
     print("Pool de connexions fermé")
 
 
@@ -31,14 +29,17 @@ app = FastAPI(
     title="API ENSO Monitor",
     description="Analyse des données ENSO/ONI depuis la NOAA",
     version="1.0.0",
-    lifespan=lifespan,
 )
+
+# Enregistrer les événements de démarrage/arrêt
+app.add_event_handler("startup", lifespan_startup)
+app.add_event_handler("shutdown", lifespan_shutdown)
 
 app.include_router(router)
 
 
 @app.get("/")
-async def root():
+def root():
     return {"message": "API ENSO Monitor v1"}
 
 

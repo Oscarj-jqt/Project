@@ -1,44 +1,42 @@
 """
-Pool de connexions PostgreSQL avec psycopg 3.
+Pool de connexions PostgreSQL synchrone avec psycopg 3.
 
-Le pool est initialisé au démarrage de l'API et fermé à l'arrêt.
-Chaque requête obtient une connexion réutilisable du pool.
-
+Utilise ConnectionPool classique (non-async) pour compatibilité maximale.
 """
 
-from contextlib import asynccontextmanager
+from contextlib import contextmanager
 
-from psycopg_pool import AsyncConnectionPool
+from psycopg_pool import ConnectionPool
 
 from config import DatabaseConfig
 
-_pool: AsyncConnectionPool | None = None
+_pool: ConnectionPool | None = None
 
 
-async def initialize_pool(config: DatabaseConfig) -> None:
+def initialize_pool(config: DatabaseConfig) -> None:
     """Initialise le pool de connexions. À appeler au démarrage de l'API."""
     global _pool
-    _pool = AsyncConnectionPool(config.connection_string)
-    await _pool.open()
+    _pool = ConnectionPool(config.connection_string, min_size=1, max_size=10)
+    _pool.open()
 
 
-async def close_pool() -> None:
+def close_pool() -> None:
     """Ferme le pool de connexions. À appeler à l'arrêt de l'API."""
     global _pool
     if _pool:
-        await _pool.close()
+        _pool.close()
         _pool = None
 
 
-def get_pool() -> AsyncConnectionPool:
+def get_pool() -> ConnectionPool:
     if _pool is None:
         raise RuntimeError("Le pool de connexions n'est pas initialisé")
     return _pool
 
 
-@asynccontextmanager
-async def get_connection():
-
+@contextmanager
+def get_connection():
+    """Contexte synchrone pour obtenir une connexion du pool."""
     pool = get_pool()
-    async with pool.connection() as conn:
+    with pool.connection() as conn:
         yield conn

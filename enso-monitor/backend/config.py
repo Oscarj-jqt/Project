@@ -1,5 +1,10 @@
 import os
 from dataclasses import dataclass
+from urllib.parse import quote
+from dotenv import load_dotenv
+
+# Charger le fichier .env au démarrage du module
+load_dotenv()
 
 
 @dataclass(frozen=True)
@@ -13,8 +18,10 @@ class DatabaseConfig:
 
     @property
     def connection_string(self) -> str:
+        # URL-encoder le mot de passe au cas où il contient des caractères spéciaux
+        encoded_password = quote(self.password, safe="")
         return (
-            f"postgresql+psycopg://{self.user}:{self.password}@"
+            f"postgresql://{self.user}:{encoded_password}@"
             f"{self.host}:{self.port}/{self.database}"
         )
 
@@ -35,3 +42,4 @@ class DatabaseConfig:
 
 def get_database_config() -> DatabaseConfig:
     return DatabaseConfig.from_environment()
+
