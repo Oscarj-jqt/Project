@@ -3,7 +3,7 @@ import axios from 'axios';
 import type { ONIObservation, FilterOptions, HealthResponse } from '../types';
 
 /** Configuration API : pointe localhost:8000 en dev, ajusté par .env en prod */
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
 
 const apiClient: AxiosInstance = axios.create({
   baseURL: API_BASE_URL,
@@ -17,7 +17,7 @@ const apiClient: AxiosInstance = axios.create({
 export const oniAPI = {
   /**
    * Vérifie la connexion à la base de données
-   * @returns {Promise<HealthResponse>} Status de la DB
+   * @returns {Promise<HealthResponse>} 
    */
   async health(): Promise<HealthResponse> {
     const response = await apiClient.get<HealthResponse>('/health');
@@ -26,7 +26,7 @@ export const oniAPI = {
 
   /**
    * Récupère les observations ONI, optionnellement filtrées par date
-   * @param options Paramètres de filtrage (debut, fin en YYYY-MM-DD)
+   * @param options Paramètres de filtrage
    * @returns {Promise<ONIObservation[]>} Liste des observations triées par date
    */
   async getObservations(options?: FilterOptions): Promise<ONIObservation[]> {
