@@ -10,9 +10,7 @@ J3 terminé : API FastAPI avec 2 endpoints, filtres de dates, 10 tests validés.
 
 ## Organisation
 
-- `frontend/` : future interface React/TypeScript
 - `backend/` : API FastAPI et ETL Python
-- `data/` : sources brutes et métadonnées
 
 ## Installation et Configuration
 
@@ -50,7 +48,7 @@ J3 terminé : API FastAPI avec 2 endpoints, filtres de dates, 10 tests validés.
 
 ## PostgreSQL en local
 
-Docker Desktop doit être démarré. Depuis PowerShell, dans le dossier
+Docker doit être démarré. Depuis PowerShell, dans le dossier
 `enso-monitor/` :
 
 1. Créer un `.env` dans `backend/` avec le mot de passe PostgreSQL et les autres variables. Le fichier `.env` ne doit pas être ajouté à Git.
