@@ -1,4 +1,4 @@
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts';
+import { ComposedChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts';
 import type { ONIObservation } from '../types';
 import './ONIChart.css';
 
@@ -6,23 +6,46 @@ interface ONIChartProps {
   data: ONIObservation[];
 }
 
+interface ChartData extends ONIObservation {
+  fill?: string;
+}
+
 /**
  * Composant graphique : visualise la courbe ONI avec phases El Niño/La Niña
  * - Rouge : El Niño (ONI >= 0.5)
- * - Bleu : La Niña (ONI <= -0.5)
- * - Gris : Neutre
+ * - Bleu clair : La Niña (ONI <= -0.5)
+ * - Blanc : Neutre
  */
 export default function ONIChart({ data }: ONIChartProps) {
   if (data.length === 0) return null;
 
+  // Préparer les données avec couleurs de fond
+  const chartData: ChartData[] = data.map((obs) => ({
+    ...obs,
+    fill: obs.valeur_oni >= 0.5 ? '#ffe6e6' : obs.valeur_oni <= -0.5 ? '#e6f2ff' : 'transparent',
+  }));
+
+  const minValue = Math.min(...data.map((o) => o.valeur_oni));
+  const maxValue = Math.max(...data.map((o) => o.valeur_oni));
+
   return (
     <section className="oni-chart">
       <h2>Évolution de l'indice ONI</h2>
-      
+
       <ResponsiveContainer width="100%" height={400}>
-        <LineChart data={data} margin={{ top: 5, right: 30, left: 0, bottom: 80 }}>
+        <ComposedChart data={chartData} margin={{ top: 5, right: 30, left: 0, bottom: 80 }}>
+          {/* Zones colorées de fond */}
+          <defs>
+            <pattern id="el-nino-bg" x="0" y="0" width="100%" height="100%" patternUnits="userSpaceOnUse">
+              <rect x="0" y="0" width="100%" height="100%" fill="#fff5f5" />
+            </pattern>
+            <pattern id="la-nina-bg" x="0" y="0" width="100%" height="100%" patternUnits="userSpaceOnUse">
+              <rect x="0" y="0" width="100%" height="100%" fill="#f0f8ff" />
+            </pattern>
+          </defs>
+
           <CartesianGrid strokeDasharray="3 3" stroke="#ddd" />
-          
+
           <XAxis
             dataKey="date_centrale"
             tick={{ fontSize: 12 }}
@@ -30,12 +53,12 @@ export default function ONIChart({ data }: ONIChartProps) {
             textAnchor="end"
             height={100}
           />
-          
+
           <YAxis
             label={{ value: 'Anomalie (°C)', angle: -90, position: 'insideLeft' }}
-            domain={[-3, 3]}
+            domain={[Math.floor(minValue * 2) / 2, Math.ceil(maxValue * 2) / 2]}
           />
-          
+
           <Tooltip
             contentStyle={{
               backgroundColor: 'rgba(255, 255, 255, 0.95)',
@@ -45,25 +68,25 @@ export default function ONIChart({ data }: ONIChartProps) {
             formatter={(value) => `${Number(value).toFixed(2)}°C`}
             labelFormatter={(label) => `${label}`}
           />
-          
+
           <Legend />
-          
-          {/* Zones de référence */}
-          <ReferenceLine y={0.5} stroke="#d9534f" strokeDasharray="5 5" label="El Niño" />
-          <ReferenceLine y={-0.5} stroke="#5cb85c" strokeDasharray="5 5" label="La Niña" />
+
+          {/* Lignes de référence avec labels */}
+          <ReferenceLine y={0.5} stroke="#dc3545" strokeDasharray="5 5" label={{ value: 'El Niño', position: 'right', fill: '#dc3545' }} />
+          <ReferenceLine y={-0.5} stroke="#0dcaf0" strokeDasharray="5 5" label={{ value: 'La Niña', position: 'right', fill: '#0dcaf0' }} />
           <ReferenceLine y={0} stroke="#999" strokeDasharray="3 3" />
-          
+
           {/* Courbe principale */}
           <Line
             type="monotone"
             dataKey="valeur_oni"
-            stroke="#3498db"
+            stroke="#0d6efd"
             dot={false}
-            strokeWidth={2}
+            strokeWidth={2.5}
             isAnimationActive={false}
             name="Indice ONI"
           />
-        </LineChart>
+        </ComposedChart>
       </ResponsiveContainer>
 
       {/* Statistiques */}
@@ -81,8 +104,7 @@ export default function ONIChart({ data }: ONIChartProps) {
         <div className="stat">
           <span className="stat-label">Min/Max :</span>
           <span className="stat-value">
-            {Math.min(...data.map((o) => o.valeur_oni)).toFixed(2)} /
-            {Math.max(...data.map((o) => o.valeur_oni)).toFixed(2)}°C
+            {minValue.toFixed(2)} / {maxValue.toFixed(2)}°C
           </span>
         </div>
       </div>

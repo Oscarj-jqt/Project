@@ -1,0 +1,263 @@
+/* Episode Comparison Styles */
+
+.episode-comparison {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.episode-comparison h2 {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.5rem;
+  color: #212529;
+}
+
+/* Grid d'épisodes */
+.episodes-container {
+  margin-bottom: 2rem;
+}
+
+.episodes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.episode-card {
+  padding: 1rem;
+  background: white;
+  border: 2px solid #dee2e6;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.episode-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.episode-card.selected {
+  border-color: #0d6efd;
+  background: #e7f1ff;
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
+}
+
+/* Variantes par phase */
+.episode-card.episode-el-niño {
+  border-left: 4px solid #dc3545;
+}
+
+.episode-card.episode-la-niña {
+  border-left: 4px solid #0dcaf0;
+}
+
+.card-phase {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  color: #212529;
+}
+
+.episode-card.episode-el-niño .card-phase {
+  color: #dc3545;
+}
+
+.episode-card.episode-la-niña .card-phase {
+  color: #0dcaf0;
+}
+
+.card-intensity {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  background: #e9ecef;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #495057;
+  margin-bottom: 0.75rem;
+}
+
+.card-dates {
+  font-size: 0.85rem;
+  color: #6c757d;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.card-duration {
+  font-weight: 600;
+  color: #212529;
+  margin-bottom: 0.5rem;
+}
+
+.card-avg {
+  font-size: 0.85rem;
+  color: #495057;
+}
+
+/* Résultats de comparaison */
+.comparison-result {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: white;
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+}
+
+.comparison-result h3 {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.25rem;
+  color: #212529;
+}
+
+.comparison-columns {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.episode-col {
+  padding: 1rem;
+  border-radius: 6px;
+  background: #f8f9fa;
+}
+
+.episode-col.episode-el-niño {
+  background: #fff5f5;
+  border-left: 3px solid #dc3545;
+}
+
+.episode-col.episode-la-niña {
+  background: #f0f8ff;
+  border-left: 3px solid #0dcaf0;
+}
+
+.episode-col h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.episode-col.episode-el-niño h4 {
+  color: #dc3545;
+}
+
+.episode-col.episode-la-niña h4 {
+  color: #0dcaf0;
+}
+
+.col-dates {
+  margin: 0 0 1rem 0;
+  font-size: 0.85rem;
+  color: #6c757d;
+}
+
+.metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.metric {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background: white;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+.metric-label {
+  color: #6c757d;
+  font-weight: 500;
+}
+
+.metric-value {
+  color: #212529;
+  font-weight: 600;
+}
+
+/* Différences */
+.comparison-diff {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 6px;
+}
+
+.diff-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.diff-label {
+  font-size: 0.85rem;
+  color: #6c757d;
+  font-weight: 500;
+}
+
+.diff-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #6c757d;
+}
+
+.diff-value.positive {
+  color: #198754;
+}
+
+.diff-value.negative {
+  color: #dc3545;
+}
+
+/* Hint */
+.comparison-hint {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  background: #fff3cd;
+  color: #664d03;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .comparison-columns {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .comparison-diff {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}
+
+@media (max-width: 768px) {
+  .episodes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .comparison-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .comparison-diff {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .episode-comparison {
+    padding: 1rem;
+  }
+}

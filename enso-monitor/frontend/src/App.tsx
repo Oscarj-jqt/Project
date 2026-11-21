@@ -3,6 +3,7 @@ import type { ONIObservation, FilterOptions } from './types';
 import { oniAPI } from './services/api';
 import Filters from './components/Filters';
 import ONIChart from './components/ONIChart';
+import EpisodeComparison from './components/EpisodeComparison';
 import './App.css';
 
 /** Composant principal : gère l'état global et les appels API */
@@ -46,7 +47,12 @@ export default function App() {
 
         {loading && <div className="loading">Chargement des données...</div>}
 
-        {!loading && observations.length > 0 && <ONIChart data={observations} />}
+        {!loading && observations.length > 0 && (
+          <>
+            <ONIChart data={observations} />
+            <EpisodeComparison observations={observations} />
+          </>
+        )}
 
         {!loading && observations.length === 0 && !error && (
           <div className="no-data">Aucune donnée pour cette période</div>
