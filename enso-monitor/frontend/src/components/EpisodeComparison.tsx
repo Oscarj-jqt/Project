@@ -7,9 +7,17 @@ interface EpisodeComparisonProps {
   observations: ONIObservation[];
 }
 
+const EPISODES_PER_PAGE = 6;
+
 export default function EpisodeComparison({ observations }: EpisodeComparisonProps) {
   const episodes = useMemo(() => extractEpisodes(observations), [observations]);
   const [selectedEpisodes, setSelectedEpisodes] = useState<[string | null, string | null]>([null, null]);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const totalPages = Math.ceil(episodes.length / EPISODES_PER_PAGE);
+  const startIdx = (currentPage - 1) * EPISODES_PER_PAGE;
+  const endIdx = startIdx + EPISODES_PER_PAGE;
+  const paginatedEpisodes = episodes.slice(startIdx, endIdx);
 
   const selectEpisode = (episodeId: string, slot: 0 | 1) => {
     const newSelected: [string | null, string | null] = [...selectedEpisodes] as [string | null, string | null];
@@ -32,7 +40,7 @@ export default function EpisodeComparison({ observations }: EpisodeComparisonPro
 
       <div className="episodes-container">
         <div className="episodes-grid">
-          {episodes.map((episode) => (
+          {paginatedEpisodes.map((episode) => (
             <div
               key={episode.id}
               className={`episode-card episode-${episode.phase.toLowerCase().replace(' ', '-')} ${selectedEpisodes.includes(episode.id) ? 'selected' : ''}`}
@@ -60,75 +68,109 @@ export default function EpisodeComparison({ observations }: EpisodeComparisonPro
             </div>
           ))}
         </div>
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="pagination">
+            <button
+              className="pagination-btn"
+              onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+              disabled={currentPage === 1}
+            >
+              ← Précédent
+            </button>
+            <span className="pagination-info">
+              Page {currentPage} / {totalPages}
+            </span>
+            <button
+              className="pagination-btn"
+              onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+              disabled={currentPage === totalPages}
+            >
+              Suivant →
+            </button>
+          </div>
+        )}
       </div>
 
       {canCompare && comparison && ep1 && ep2 && (
-        <div className="comparison-result">
-          <h3>Résultats de la comparaison</h3>
+        <>
+          <div className="comparison-result">
+            <h3>Résultats de la comparaison</h3>
 
-          <div className="comparison-columns">
-            <div className={`episode-col episode-${ep1.phase.toLowerCase().replace(' ', '-')}`}>
-              <h4>{ep1.phase}</h4>
-              <p className="col-dates">{ep1.debut} → {ep1.fin}</p>
-              <div className="metrics">
-                <div className="metric">
-                  <span className="metric-label">Durée</span>
-                  <span className="metric-value">{comparison.duration1} mois</span>
-                </div>
-                <div className="metric">
-                  <span className="metric-label">Intensité</span>
-                  <span className="metric-value">{ep1.intensite}</span>
-                </div>
-                <div className="metric">
-                  <span className="metric-label">Moy. ONI</span>
-                  <span className="metric-value">{comparison.avgONI1}°C</span>
-                </div>
-                <div className="metric">
-                  <span className="metric-label">Max ONI</span>
-                  <span className="metric-value">{comparison.maxONI1}°C</span>
+            <div className="comparison-columns">
+              <div className={`episode-col episode-${ep1.phase.toLowerCase().replace(' ', '-')}`}>
+                <h4>{ep1.phase}</h4>
+                <p className="col-dates">{ep1.debut} → {ep1.fin}</p>
+                <div className="metrics">
+                  <div className="metric">
+                    <span className="metric-label">Durée</span>
+                    <span className="metric-value">{comparison.duration1} mois</span>
+                  </div>
+                  <div className="metric">
+                    <span className="metric-label">Intensité</span>
+                    <span className="metric-value">{ep1.intensite}</span>
+                  </div>
+                  <div className="metric">
+                    <span className="metric-label">Moy. ONI</span>
+                    <span className="metric-value">{comparison.avgONI1}°C</span>
+                  </div>
+                  <div className="metric">
+                    <span className="metric-label">Max ONI</span>
+                    <span className="metric-value">{comparison.maxONI1}°C</span>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div className="comparison-diff">
-              <div className="diff-item">
-                <span className="diff-label">Durée</span>
-                <span className={`diff-value ${comparison.durationDiff > 0 ? 'positive' : comparison.durationDiff < 0 ? 'negative' : ''}`}>
-                  {comparison.durationDiff > 0 ? '+' : ''}{comparison.durationDiff} mois
-                </span>
+              <div className="comparison-diff">
+                <div className="diff-item">
+                  <span className="diff-label">Durée</span>
+                  <span className={`diff-value ${comparison.durationDiff > 0 ? 'positive' : comparison.durationDiff < 0 ? 'negative' : ''}`}>
+                    {comparison.durationDiff > 0 ? '+' : ''}{comparison.durationDiff} mois
+                  </span>
+                </div>
+                <div className="diff-item">
+                  <span className="diff-label">Moy. ONI</span>
+                  <span className={`diff-value ${Number(comparison.avgONIDiff) > 0 ? 'positive' : Number(comparison.avgONIDiff) < 0 ? 'negative' : ''}`}>
+                    {Number(comparison.avgONIDiff) > 0 ? '+' : ''}{comparison.avgONIDiff}°C
+                  </span>
+                </div>
               </div>
-              <div className="diff-item">
-                <span className="diff-label">Moy. ONI</span>
-                <span className={`diff-value ${Number(comparison.avgONIDiff) > 0 ? 'positive' : Number(comparison.avgONIDiff) < 0 ? 'negative' : ''}`}>
-                  {Number(comparison.avgONIDiff) > 0 ? '+' : ''}{comparison.avgONIDiff}°C
-                </span>
-              </div>
-            </div>
 
-            <div className={`episode-col episode-${ep2.phase.toLowerCase().replace(' ', '-')}`}>
-              <h4>{ep2.phase}</h4>
-              <p className="col-dates">{ep2.debut} → {ep2.fin}</p>
-              <div className="metrics">
-                <div className="metric">
-                  <span className="metric-label">Durée</span>
-                  <span className="metric-value">{comparison.duration2} mois</span>
-                </div>
-                <div className="metric">
-                  <span className="metric-label">Intensité</span>
-                  <span className="metric-value">{ep2.intensite}</span>
-                </div>
-                <div className="metric">
-                  <span className="metric-label">Moy. ONI</span>
-                  <span className="metric-value">{comparison.avgONI2}°C</span>
-                </div>
-                <div className="metric">
-                  <span className="metric-label">Max ONI</span>
-                  <span className="metric-value">{comparison.maxONI2}°C</span>
+              <div className={`episode-col episode-${ep2.phase.toLowerCase().replace(' ', '-')}`}>
+                <h4>{ep2.phase}</h4>
+                <p className="col-dates">{ep2.debut} → {ep2.fin}</p>
+                <div className="metrics">
+                  <div className="metric">
+                    <span className="metric-label">Durée</span>
+                    <span className="metric-value">{comparison.duration2} mois</span>
+                  </div>
+                  <div className="metric">
+                    <span className="metric-label">Intensité</span>
+                    <span className="metric-value">{ep2.intensite}</span>
+                  </div>
+                  <div className="metric">
+                    <span className="metric-label">Moy. ONI</span>
+                    <span className="metric-value">{comparison.avgONI2}°C</span>
+                  </div>
+                  <div className="metric">
+                    <span className="metric-label">Max ONI</span>
+                    <span className="metric-value">{comparison.maxONI2}°C</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+
+          {/* Disclaimer après comparaison */}
+          <div className="comparison-disclaimer">
+            <h4>⚠️ Important</h4>
+            <p>
+              Ces résultats sont <strong>descriptifs, non causals</strong>. Seul un scientifique qualifié peut interpréter ces données 
+              combinées à d'autres analyses pour tirer des conclusions robustes.
+            </p>
+          </div>
+        </>
       )}
 
       {selectedEpisodes.some((s) => s !== null) && !canCompare && (

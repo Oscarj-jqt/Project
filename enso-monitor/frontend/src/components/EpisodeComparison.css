@@ -22,6 +22,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .episode-card {
@@ -96,6 +97,46 @@
 .card-avg {
   font-size: 0.85rem;
   color: #495057;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #dee2e6;
+}
+
+.pagination-btn {
+  padding: 0.5rem 1rem;
+  background: #0d6efd;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background: #0b5ed7;
+  transform: scale(1.05);
+}
+
+.pagination-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.pagination-info {
+  font-weight: 600;
+  color: #495057;
+  font-size: 0.95rem;
 }
 
 /* Résultats de comparaison */
@@ -219,12 +260,34 @@
   color: #dc3545;
 }
 
+/* Disclaimer */
+.comparison-disclaimer {
+  margin-top: 1.5rem;
+  padding: 1.25rem;
+  background: #fff3cd;
+  border-left: 4px solid #ffc107;
+  border-radius: 4px;
+}
+
+.comparison-disclaimer h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  color: #664d03;
+}
+
+.comparison-disclaimer p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #664d03;
+  line-height: 1.6;
+}
+
 /* Hint */
 .comparison-hint {
   margin-top: 1rem;
   padding: 0.75rem 1rem;
-  background: #fff3cd;
-  color: #664d03;
+  background: #cfe2ff;
+  color: #084298;
   border-radius: 4px;
   font-size: 0.95rem;
   text-align: center;
@@ -232,6 +295,10 @@
 
 /* Responsive */
 @media (max-width: 1024px) {
+  .episodes-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+
   .comparison-columns {
     grid-template-columns: 1fr 1fr;
   }
@@ -260,4 +327,15 @@
   .episode-comparison {
     padding: 1rem;
   }
+
+  .pagination {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .pagination-btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
 }
+

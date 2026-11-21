@@ -13,7 +13,6 @@ export default function App() {
   const [error, setError] = useState<string | null>(null);
   const [filters, setFilters] = useState<FilterOptions>({});
 
-  // Charger les données au montage et quand les filtres changent
   useEffect(() => {
     fetchObservations();
   }, [filters]);
