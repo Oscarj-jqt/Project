@@ -111,7 +111,7 @@ export default function ONIChart({ data }: ONIChartProps) {
 
       {/* Explication des données */}
       <div className="chart-explanation">
-        <h3>ℹ️ À propos de ces données</h3>
+        <h3>À propos de ces données</h3>
         <p>
           L'indice ONI mesure l'anomalie de température océanique dans le Pacifique central (région Niño 3.4).
           Les seuils ±0.5°C classifient les phases El Niño (rouge) et La Niña (bleu).

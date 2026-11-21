@@ -164,7 +164,7 @@ export default function EpisodeComparison({ observations }: EpisodeComparisonPro
 
           {/* Disclaimer après comparaison */}
           <div className="comparison-disclaimer">
-            <h4>⚠️ Important</h4>
+            <h4>Important</h4>
             <p>
               Ces résultats sont <strong>descriptifs, non causals</strong>. Seul un scientifique qualifié peut interpréter ces données 
               combinées à d'autres analyses pour tirer des conclusions robustes.
