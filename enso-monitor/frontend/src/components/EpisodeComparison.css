@@ -41,18 +41,18 @@
 }
 
 .episode-card.selected {
-  border-color: #0d6efd;
+  border-color: var(--secondary);
   background: #e7f1ff;
-  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.25);
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.25);
 }
 
 /* Variantes par phase */
 .episode-card.episode-el-niño {
-  border-left: 4px solid #dc3545;
+  border-left: 4px solid var(--el-nino);
 }
 
 .episode-card.episode-la-niña {
-  border-left: 4px solid #0dcaf0;
+  border-left: 4px solid var(--la-nina);
 }
 
 .card-phase {
@@ -63,11 +63,11 @@
 }
 
 .episode-card.episode-el-niño .card-phase {
-  color: #dc3545;
+  color: var(--el-nino);
 }
 
 .episode-card.episode-la-niña .card-phase {
-  color: #0dcaf0;
+  color: var(--la-nina);
 }
 
 .card-intensity {
@@ -112,7 +112,7 @@
 
 .pagination-btn {
   padding: 0.5rem 1rem;
-  background: #0d6efd;
+  background: var(--secondary);
   color: white;
   border: none;
   border-radius: 4px;
@@ -123,7 +123,7 @@
 }
 
 .pagination-btn:hover:not(:disabled) {
-  background: #0b5ed7;
+  background: #005099;
   transform: scale(1.05);
 }
 
@@ -169,12 +169,12 @@
 
 .episode-col.episode-el-niño {
   background: #fff5f5;
-  border-left: 3px solid #dc3545;
+  border-left: 3px solid var(--el-nino);
 }
 
 .episode-col.episode-la-niña {
   background: #f0f8ff;
-  border-left: 3px solid #0dcaf0;
+  border-left: 3px solid var(--la-nina);
 }
 
 .episode-col h4 {
@@ -183,11 +183,11 @@
 }
 
 .episode-col.episode-el-niño h4 {
-  color: #dc3545;
+  color: var(--el-nino);
 }
 
 .episode-col.episode-la-niña h4 {
-  color: #0dcaf0;
+  color: var(--la-nina);
 }
 
 .col-dates {
@@ -257,15 +257,15 @@
 }
 
 .diff-value.negative {
-  color: #dc3545;
+  color: var(--el-nino);
 }
 
 /* Disclaimer */
 .comparison-disclaimer {
   margin-top: 1.5rem;
   padding: 1.25rem;
-  background: #fff3cd;
-  border-left: 4px solid #ffc107;
+  background: var(--warning-bg);
+  border-left: 4px solid #FFA500;
   border-radius: 4px;
 }
 
@@ -287,7 +287,7 @@
   margin-top: 1rem;
   padding: 0.75rem 1rem;
   background: #cfe2ff;
-  color: #084298;
+  color: var(--primary);
   border-radius: 4px;
   font-size: 0.95rem;
   text-align: center;
