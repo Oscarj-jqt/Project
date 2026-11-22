@@ -5,7 +5,11 @@ step.txt
 J2.txt
 J3.txt
 justification.txt
-
+diagrammes/commentaires.md
+diagrammes/github-project-j5.png
+document.md
+notes.txt
+export-word.lua
 # Python bytecode et caches
 __pycache__/
 *.pyc

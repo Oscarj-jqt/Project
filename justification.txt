@@ -39,3 +39,35 @@ Plus besoin de npm install, python -m venv, etc.
 Versions uniformes (Node 24, Python 3.12, PostgreSQL 17)
 À la fin (jour 5) : on ajoute le frontend et API au compose pour la démo.
 Services pour frontend et API (avec Dockerfile)
+
+
+
+
+UML et modélisation Diagramme de cas d’utilisation ; diagramme de classes ou modèle conceptuel ; diagramme de séquence d’un parcours clé
+• Diagrammes UML obligatoires et expliqués, maquettes, architecture et modèle de données.
+Les diagrammes doivent être lisibles et commentés, pas
+seulement insérés
+Diagrammes UML attendus
+• Cas d’utilisation : acteurs (visiteur, administrateur si utile), actions principales et frontière du système.
+• Classes ou modèle de domaine : entités Observation, Indice, Source, Import et leurs relations ;
+justification des cardinalités.
+• Séquence : chemin d’une consultation de graphique, du navigateur à l’API puis à PostgreSQL, réponse
+et erreurs
+
+On va les faire de façon simple et concis, on a tout (archi, code, readme, user stories, maquette) ce qu'il nous faut 
+dis-moi les sources dont tu as besoin (user stories est dans le GitHub Project), des captures, etc ...
+
+A l'issue je dois être en mesure de commenter sans problème un diagramme UML donc de bien le comprendre et justifier
+
+
+
+sources 
+**Sources :** [NOAA CPC — ONI, version ERSSTv6](https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/oni/v6/index.php) ;
+[NOAA CPC — RONI](https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/).
+Article d'actualité consulté :
+https://www.slate.fr/monde/phenomene-el-nino-affaiblissement-premature-vortex-polaire-froid-meteo
+Articles explicatifs
+https://www.noaa.gov/understanding-el-nino
+https://oceantoday.noaa.gov/elninolanina/
+
+

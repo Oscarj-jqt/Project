@@ -105,5 +105,4 @@ https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso/roni/
 Copie locale : 
 data/Climate Prediction Center - ONI.html
 
-Article d'actualité consulté :
-https://www.slate.fr/monde/phenomene-el-nino-affaiblissement-premature-vortex-polaire-froid-meteo
+

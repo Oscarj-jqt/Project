@@ -1,12 +1,32 @@
 # ENSO Monitor
 
-Application d'analyse historique de l'indice ONI fourni par la NOAA.
+Application d'exploration historique des phénomènes El Niño et La Niña à partir de l'indice ONI publié par la NOAA.
 
-## Périmètre du MVP
+![Capture de l'application ENSO Monitor](./assets/enso-monitor.png)
 
-- importer une série ONI 
-- stocker les données dans PostgreSQL 
-- exposer les observations avec FastAPI 
-- visualiser les valeurs dans une courbe avec React 
-- comparer deux épisodes ONI.
+## Fonctionnalités
+
+- Visualiser l'évolution de l'indice ONI et filtrer les observations par période.
+- Consulter et comparer deux épisodes identifiés dans les données.
+- Importer les données NOAA dans PostgreSQL et les exposer via une API.
+
+L'application propose une lecture historique simplifiée : les épisodes sont regroupés par seuil, sans appliquer le critère officiel de cinq saisons consécutives. Elle ne constitue pas un outil de prévision.
+
+## Technologies
+
+React, TypeScript et Recharts pour l'interface ; Python et FastAPI pour l'API et l'import des données ; PostgreSQL pour leur stockage. Docker Compose permet d'orchestrer les services.
+
+## Récupérer le projet
+
+```bash
+git clone https://github.com/Oscarj-jqt/Project.git
+cd Project
+```
+
+## Documentation
+
+- [Frontend : installation, développement et tests](./enso-monitor/frontend/README.md)
+- [Backend : configuration, import des données et API](./enso-monitor/backend/README.md)
+- [Utilisation avec Docker Compose](./enso-monitor/DOCKER.md)
+- [Source et date d'extraction des données](./enso-monitor/backend/data/README.md)
 
