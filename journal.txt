@@ -39,4 +39,27 @@ observées sur le terminal
 
 J4
 Commencement j4 avec initialisation de l'app frontend React (vite + TypeScript)
+On a initialiser React, archi dossier config API proxy -> simple sans probleme avec une archi assez clean 
+et au démarrage il y a eu juste une erreur avec la config proxy avec API il fallait juste modifier le lien de connexion pour CORS
+
+On a affiché les données sous forme de courbe avec chart (justifier)
+Ajouter les filtres de période, filtre par date 
+Afficher les épisodes El Niño et La Niña sans probleme
+Comparer deux épisodes ONI historiques, 
+Rendre l’interface responsive
+Gérer les états de chargement et d’erreur
+Fin avec tests et frontend/README.md 
  
+Conteneurisation et dépannage :
+- Création des Dockerfiles et adaptation de Compose pour PostgreSQL, l'API et le frontend.
+- L'API répondait mais la table ONI était vide. La suppression du volume PostgreSQL lors
+  du dépannage a effacé les données qu'il contenait ; supprimer le cache de build n'est
+  pas la même chose que supprimer le volume.
+- Le fichier HTML était présent dans l'image, mais le montage de backend sur /app
+  masquait le dossier data copié dans l'image. Le fichier a été déplacé dans backend/data,
+  où le chemin de l'ETL le retrouve en local et où le montage le rend accessible.
+- L'import manuel échouait car load.py ne lisait pas le .env. Il utilise maintenant la
+  configuration PostgreSQL de l'API. La commande python -m etl.load a rechargé
+  921 observations ; les tests ETL et API passent et la courbe s'affiche.
+- CORS répond à un besoin distinct pour les requêtes entre origines ; db_init a été
+  ajouté pendant le dépannage et son utilité reste à réévaluer.

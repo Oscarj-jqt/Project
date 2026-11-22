@@ -6,23 +6,11 @@ Application FastAPI pour l'analyse des données ENSO/ONI
 """
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from config import get_database_config
 from db import initialize_pool, close_pool
 from routers.api import router
-
-
-def lifespan_startup():
-    """Initialise le pool de connexions au démarrage"""
-    config = get_database_config()
-    initialize_pool(config)
-    print(f"Pool de connexions initialisé : {config.host}:{config.port}/{config.database}")
-
-
-def lifespan_shutdown():
-    """Ferme le pool de connexions à l'arrêt"""
-    close_pool()
-    print("Pool de connexions fermé")
 
 
 app = FastAPI(
@@ -31,9 +19,30 @@ app = FastAPI(
     version="1.0.0",
 )
 
-# Enregistrer les événements de démarrage/arrêt
-app.add_event_handler("startup", lifespan_startup)
-app.add_event_handler("shutdown", lifespan_shutdown)
+# Configure CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173", "http://localhost:3000", "http://frontend:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+@app.on_event("startup")
+def lifespan_startup():
+    """Initialise le pool de connexions au démarrage"""
+    config = get_database_config()
+    initialize_pool(config)
+    print(f"Pool de connexions initialisé : {config.host}:{config.port}/{config.database}")
+
+
+@app.on_event("shutdown")
+def lifespan_shutdown():
+    """Ferme le pool de connexions à l'arrêt"""
+    close_pool()
+    print("Pool de connexions fermé")
+
 
 app.include_router(router)
 

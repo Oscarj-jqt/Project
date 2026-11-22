@@ -28,7 +28,7 @@ PERIODS = (
 )
 
 DEFAULT_SOURCE = (
-    Path(__file__).resolve().parents[2]
+    Path(__file__).resolve().parent.parent
     / "data"
     / "Climate Prediction Center - ONI.html"
 )

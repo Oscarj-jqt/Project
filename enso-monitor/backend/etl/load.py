@@ -4,10 +4,9 @@ Chargement des observations ONI dans PostgreSQL.
 Documentation psycopg 3 : https://www.psycopg.org/psycopg3/docs/
 """
 
-import os
-
 import psycopg
 
+from config import get_database_config
 from etl.oni import ONIObservation, read_oni_file
 
 # Insertion ou remplacement : si la date centrale existe déjà ,
@@ -23,11 +22,8 @@ SET periode = EXCLUDED.periode,
 
 
 def get_database_url() -> str:
-    """Construit l'URL de connexion ; le mot de passe vient de l'environnement (.env)."""
-    password = os.environ["POSTGRES_PASSWORD"]
-    host = os.environ.get("POSTGRES_HOST", "127.0.0.1")
-    port = os.environ.get("POSTGRES_PORT", "5432")
-    return f"postgresql://enso_app:{password}@{host}:{port}/enso_monitor"
+    """Utilise la même configuration PostgreSQL que l'API."""
+    return get_database_config().connection_string
 
 
 def load_observations(observations: list[ONIObservation], database_url: str) -> int:

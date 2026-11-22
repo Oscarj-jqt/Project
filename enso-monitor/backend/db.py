@@ -18,6 +18,10 @@ def initialize_pool(config: DatabaseConfig) -> None:
     global _pool
     _pool = ConnectionPool(config.connection_string, min_size=1, max_size=10)
     _pool.open()
+    
+    # Initialiser les données si nécessaire
+    from db_init import init_data
+    init_data(config.connection_string)
 
 
 def close_pool() -> None:

@@ -3,7 +3,18 @@ from decimal import Decimal
 
 import pytest
 
+from etl.load import get_database_url
 from etl.oni import parse_oni_html, read_oni_file
+
+
+def test_loader_uses_configured_database_and_escapes_password(monkeypatch) -> None:
+    monkeypatch.setenv("POSTGRES_HOST", "db")
+    monkeypatch.setenv("POSTGRES_PORT", "5433")
+    monkeypatch.setenv("POSTGRES_DB", "climate")
+    monkeypatch.setenv("POSTGRES_USER", "climate_user")
+    monkeypatch.setenv("POSTGRES_PASSWORD", "a@b/c")
+
+    assert get_database_url() == "postgresql://climate_user:a%40b%2Fc@db:5433/climate"
 
 
 def test_transforms_year_row_into_month_centered_observations() -> None:

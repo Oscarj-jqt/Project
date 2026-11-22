@@ -7,4 +7,8 @@ Afficher les épisodes El Niño et La Niña
 Comparer deux épisodes ONI historiques
 Rendre l’interface responsive
 Gérer les états de chargement et d’erreur
-Tests vitest + readme documentation, justification des choix
+Tests vitest
+Readme documentation, justification des choix
+
+pas oublier documentation du frontend 
+parcours, installation dependances etc
