@@ -1,31 +1,50 @@
-# ENSO Monitor
+::: {.cover-gap}
+:::
 
-## Dossier de conception
+::: {custom-style="Title"}
+ENSO Monitor
+:::
 
-**Application d'analyse des données scientifiques El Niño et La Niña**
+::: {custom-style="Subtitle"}
+**Dossier de conception**
+
+Application d'analyse des données scientifiques  
+El Niño et La Niña
 
 Projet individuel
+:::
 
-**Auteur :** Oscar JACQUET  
+::: {.cover-gap}
+:::
+
+::: {custom-style="Subtitle"}
+**Auteur :** Oscar JACQUET
+
 **Formation :** Bachelor Développement Web
+
 **Année :** 2026
 
 **Projet GitHub :** [Oscarj-jqt/Project](https://github.com/Oscarj-jqt/Project)
+:::
 
 <div style="page-break-after: always; break-after: page;"></div>
 
-## 2. Sommaire
+::: {custom-style="Title"}
+Sommaire
+:::
 
-1. Page de couverture — p. 1
-2. Sommaire — p. 2
-3. Besoin et contexte — p. 3
-4. Fonctionnel et expérience utilisateur — p. 4
-5. UML et modélisation — p. 6
-6. Architecture technique — p. 9
-7. Organisation du projet — p. 11
-8. Qualité et sécurité — p. 12
-9. Déploiement proposé — p. 14
-10. Bilan et sources — p. 15
+| Partie | Page |
+|:-----------------------------------------------------------------|--------------:|
+| 1. Page de couverture | 1 |
+| 2. Sommaire | 2 |
+| 3. Besoin et contexte | 3 |
+| 4. Fonctionnel et expérience utilisateur | 4 |
+| 5. UML et modélisation | 6 |
+| 6. Architecture technique | 9 |
+| 7. Organisation du projet | 11 |
+| 8. Qualité et sécurité | 12 |
+| 9. Déploiement proposé | 14 |
+| 10. Bilan et sources | 15 |
 
 <div style="page-break-after: always; break-after: page;"></div>
 
