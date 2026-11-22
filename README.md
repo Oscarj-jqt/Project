@@ -29,4 +29,5 @@ cd Project
 - [Backend : configuration, import des données et API](./enso-monitor/backend/README.md)
 - [Utilisation avec Docker Compose](./enso-monitor/DOCKER.md)
 - [Source et date d'extraction des données](./enso-monitor/backend/data/README.md)
+- [GitHub Project : planning et suivi des issues](https://github.com/users/Oscarj-jqt/projects/2)
 
